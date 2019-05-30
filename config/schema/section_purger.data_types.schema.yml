@@ -1,6 +1,6 @@
 section_purger_header:
   type: mapping
-  label: 'HTTP Header'
+  label: 'Section Header'
   mapping:
     field:
       type: string

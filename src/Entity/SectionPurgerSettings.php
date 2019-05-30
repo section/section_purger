@@ -6,11 +6,11 @@ use Drupal\purge\Plugin\Purge\Purger\PurgerSettingsBase;
 use Drupal\purge\Plugin\Purge\Purger\PurgerSettingsInterface;
 
 /**
- * Defines the HTTP purger settings entity.
+ * Defines the section purger settings entity.
  *
  * @ConfigEntityType(
- *   id = "httppurgersettings",
- *   label = @Translation("Http purger settings"),
+ *   id = "sectionpurgersettings",
+ *   label = @Translation("Section"),
  *   config_prefix = "settings",
  *   static_cache = TRUE,
  *   entity_keys = {"id" = "id"},
