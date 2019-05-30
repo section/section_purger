@@ -14,7 +14,7 @@ use Drupal\section_purger\Plugin\Purge\Purger\SectionPurgerBase;
  *   label = @Translation("HTTP Purger"),
  *   configform = "\Drupal\section_purger\Form\SectionPurgerForm",
  *   cooldown_time = 0.0,
- *   description = @Translation("Configurable purger that makes HTTP requests for each given invalidation instruction."),
+ *   description = @Translation("Purger that sends invalidation expressions from your Drupal instance to the Section platform."),
  *   multi_instance = TRUE,
  *   types = {},
  * )
@@ -32,6 +32,11 @@ class SectionPurger extends SectionPurgerBase implements PurgerInterface {
       $uri = $this->getUri($token_data);
       $opt = $this->getOptions($token_data);
       $uri = $uri . $opt["headers"]["purge-cache-tags"];
+
+      if ($this->getSiteName()) {
+        $uri = $uri . " %26%26 req.http.host == " . $this->getSiteName();
+      }
+
       try {
         $this->client->request($this->settings->request_method, $uri, $opt);
         $invalidation->setState(InvalidationInterface::SUCCEEDED);
