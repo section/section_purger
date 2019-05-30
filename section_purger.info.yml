@@ -1,14 +1,9 @@
-name: Section HTTP Purger
+name: Section Purger
 type: module
 description: 'Purger for clearing cache on the Section Platform'
 package: "Purge - reverse proxies & CDNs"
-# core: 8.x
 dependencies:
   - purge
   - purge_tokens
 
-# Information added by Drupal.org packaging script on 2016-09-07
-version: '8.x-1.0-beta4'
-core: '8.x'
-project: 'section_purger'
-datestamp: 1473237240
+core: 8.x

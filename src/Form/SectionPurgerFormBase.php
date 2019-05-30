@@ -114,7 +114,7 @@ abstract class SectionPurgerFormBase extends PurgerConfigFormBase {
     $form['name'] = [
       '#title' => $this->t('Name'),
       '#type' => 'textfield',
-      '#description' => $this->t('A label that describes this purger.'),
+      '#description' => $this->t('Section Purger for Drupal 8.'),
       '#default_value' => $settings->name,
       '#required' => TRUE,
     ];
@@ -141,10 +141,10 @@ abstract class SectionPurgerFormBase extends PurgerConfigFormBase {
       '#title' => $this->t('Request'),
       '#description' => $this->t('In this section you configure how a single HTTP request looks like.'),
     ];
-    $form['request']['hostname'] = [
-      '#title' => $this->t('Hostname'),
+    $form['request']['sitename'] = [
+      '#title' => $this->t('Drupal Site Name'),
       '#type' => 'textfield',
-      '#default_value' => $settings->hostname,
+      '#default_value' => $settings->sitename,
     ];
     $form['request']['account'] = [
       '#title' => $this->t('Account Number'),
@@ -187,7 +187,7 @@ abstract class SectionPurgerFormBase extends PurgerConfigFormBase {
       '#type' => 'details',
       '#group' => 'tabs',
       '#title' => $this->t('Headers'),
-      '#description' => $this->t('Configure the outbound HTTP headers, leave empty to delete.'),
+      '#description' => $this->t('Define the Header sent to Section'),
     ];
     $form['headers']['headers'] = [
       '#tree' => TRUE,

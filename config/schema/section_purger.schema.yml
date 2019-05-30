@@ -22,6 +22,9 @@ section_purger.settings.*:
     hostname:
       type: string
       translatable: false
+    sitename:
+      type: string
+      translatable: false
     port:
       type: integer
       translatable: false

@@ -41,6 +41,13 @@ class SectionPurgerSettings extends PurgerSettingsBase implements PurgerSettings
    */
 
   /**
+   * The hostname of the Drupal site to purge.
+   *
+   * @var string
+   */
+  public $sitename = '';
+
+  /**
    * The host or IP-address to connect to.
    *
    * @var string

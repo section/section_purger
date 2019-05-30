@@ -199,6 +199,9 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
       $this->settings->application
     );
   }
+  protected function getSiteName() {
+    return $this->settings->sitename;
+  }
 
 
   /**
