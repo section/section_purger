@@ -7,11 +7,11 @@ use Drupal\purge\Plugin\Purge\Invalidation\InvalidationInterface;
 use Drupal\section_purger\Plugin\Purge\Purger\SectionPurgerBase;
 
 /**
- * HTTP Purger.
+ * Section Purger.
  *
  * @PurgePurger(
- *   id = "http",
- *   label = @Translation("HTTP Purger"),
+ *   id = "Section Purger",
+ *   label = @Translation("Section Purger"),
  *   configform = "\Drupal\section_purger\Form\SectionPurgerForm",
  *   cooldown_time = 0.0,
  *   description = @Translation("Purger that sends invalidation expressions from your Drupal instance to the Section platform."),
