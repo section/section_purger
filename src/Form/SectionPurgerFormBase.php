@@ -156,6 +156,11 @@ abstract class SectionPurgerFormBase extends PurgerConfigFormBase {
       '#type' => 'textfield',
       '#default_value' => $settings->application,
     ];
+    $form['request']['environmentname'] = [
+      '#title' => $this->t('Name of your Section environment i.e. Production, Staging, UAT'),
+      '#type' => 'textfield',
+      '#default_value' => $settings->environmentname,
+    ];
     $form['request']['username'] = [
       '#title' => $this->t('Section Username'),
       '#type' => 'textfield',
