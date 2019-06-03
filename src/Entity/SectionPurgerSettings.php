@@ -77,6 +77,12 @@ class SectionPurgerSettings extends PurgerSettingsBase implements PurgerSettings
 
 
   /**
+   * Section environment name i.e. Production, Staging, etc.
+   *
+   * @var string
+   */
+  public $environmentname = 'Production';
+  /**
    * Section Username.
    *
    * @var string

@@ -37,6 +37,9 @@ section_purger.settings.*:
     application:
       type: integer
       translatable: false
+    environmentname:
+      type: string
+      translatable: false
     username:
       type: string
       translatable: false

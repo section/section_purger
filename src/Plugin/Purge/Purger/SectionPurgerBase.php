@@ -190,13 +190,14 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    */
   protected function getUri($token_data) {
     return sprintf(
-      '%s://%s:%s%sapi/v1/account/%s/application/%s/environment/Production/proxy/varnish/state?banExpression=obj.http.Purge-Cache-Tags ~ ',
+      '%s://%s:%s%sapi/v1/account/%s/application/%s/environment/%s/proxy/varnish/state?banExpression=obj.http.Purge-Cache-Tags ~ ',
       $this->settings->scheme,
       $this->settings->hostname,
       $this->settings->port,
       $this->token->replace($this->settings->path, $token_data),
       $this->settings->account,
-      $this->settings->application
+      $this->settings->application,
+      $this->settings->environmentname
     );
   }
   protected function getSiteName() {
