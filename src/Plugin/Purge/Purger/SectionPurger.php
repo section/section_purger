@@ -10,7 +10,7 @@ use Drupal\section_purger\Plugin\Purge\Purger\SectionPurgerBase;
  * Section Purger.
  *
  * @PurgePurger(
- *   id = "Section Purger",
+ *   id = "section_purger",
  *   label = @Translation("Section Purger"),
  *   configform = "\Drupal\section_purger\Form\SectionPurgerForm",
  *   cooldown_time = 0.0,

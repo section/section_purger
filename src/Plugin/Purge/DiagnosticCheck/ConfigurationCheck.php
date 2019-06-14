@@ -12,11 +12,11 @@ use Drupal\section_purger\Entity\SectionPurgerSettings;
  * Verifies that only fully configured HTTP purgers load.
  *
  * @PurgeDiagnosticCheck(
- *   id = "httpconfiguration",
- *   title = @Translation("HTTP"),
- *   description = @Translation("Verifies that only fully configured HTTP purgers load."),
+ *   id = "sectionconfiguration",
+ *   title = @Translation("Section"),
+ *   description = @Translation("Verifies that only fully configured Section purgers load."),
  *   dependent_queue_plugins = {},
- *   dependent_purger_plugins = {"http"}
+ *   dependent_purger_plugins = {"section_purger"}
  * )
  */
 class ConfigurationCheck extends DiagnosticCheckBase implements DiagnosticCheckInterface {
@@ -65,7 +65,7 @@ class ConfigurationCheck extends DiagnosticCheckBase implements DiagnosticCheckI
     // Load configuration objects for all enabled HTTP purgers.
     $plugins = [];
     foreach ($this->purgePurgers->getPluginsEnabled() as $id => $plugin_id) {
-      if (in_array($plugin_id, ['http', 'httpbundled'])) {
+      if (in_array($plugin_id, ['section_purger'])) {
         $plugins[$id] = SectionPurgerSettings::load($id);
       }
     }
@@ -74,7 +74,7 @@ class ConfigurationCheck extends DiagnosticCheckBase implements DiagnosticCheckI
     $labels  = $this->purgePurgers->getLabels();
     foreach ($plugins as $id => $settings) {
       $t = ['@purger' => $labels[$id]];
-      foreach (['name', 'hostname', 'account', 'application', 'username', 'password', 'environmentname', 'port', 'request_method', 'scheme'] as $f) {
+      foreach (['name', 'hostname', 'account', 'application', 'username', 'password', 'sitename', 'environmentname', 'port', 'request_method', 'scheme'] as $f) {
         if (empty($settings->$f)) {
           $this->recommendation = $this->t("@purger not configured.", $t);
           return SELF::SEVERITY_ERROR;
