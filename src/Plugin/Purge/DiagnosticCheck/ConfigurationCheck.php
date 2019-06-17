@@ -16,7 +16,7 @@ use Drupal\section_purger\Entity\SectionPurgerSettings;
  *   title = @Translation("Section"),
  *   description = @Translation("Verifies that only fully configured Section purgers load."),
  *   dependent_queue_plugins = {},
- *   dependent_purger_plugins = {"section_purger"}
+ *   dependent_purger_plugins = {"section"}
  * )
  */
 class ConfigurationCheck extends DiagnosticCheckBase implements DiagnosticCheckInterface {
@@ -65,7 +65,7 @@ class ConfigurationCheck extends DiagnosticCheckBase implements DiagnosticCheckI
     // Load configuration objects for all enabled HTTP purgers.
     $plugins = [];
     foreach ($this->purgePurgers->getPluginsEnabled() as $id => $plugin_id) {
-      if (in_array($plugin_id, ['section_purger'])) {
+      if (in_array($plugin_id, ['section'])) {
         $plugins[$id] = SectionPurgerSettings::load($id);
       }
     }
