@@ -33,6 +33,7 @@ class SectionPurger extends SectionPurgerBase implements PurgerInterface {
       $opt = $this->getOptions($token_data);
       $uri = $uri . $opt["headers"]["purge-cache-tags"];
 
+      // the below is necessary because of an encoding issue with the & character. 
       if ($this->getSiteName()) {
         $uri = $uri . " %26%26 req.http.host == " . $this->getSiteName();
       }
