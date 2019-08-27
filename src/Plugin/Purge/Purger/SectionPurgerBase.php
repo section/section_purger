@@ -8,6 +8,7 @@ use Drupal\Core\Utility\Token;
 use Drupal\purge\Plugin\Purge\Purger\PurgerBase;
 use Drupal\purge\Plugin\Purge\Purger\PurgerInterface;
 use Drupal\section_purger\Entity\SectionPurgerSettings;
+use Drupal\section_purger\Entity\RawInvalidation;
 
 /**
  * Abstract base class for HTTP based configurable purgers.
@@ -176,7 +177,7 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    * {@inheritdoc}
    */
   public function getTypes() {
-    return [$this->settings->invalidationtype];
+    return ["url", "wildcardurl", "tag", "everything", "wildcardpath", "regex", "path", "domain", "raw"];
   }
 
   /**
@@ -189,16 +190,17 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    *   URL string representation.
    */
   protected function getUri($token_data) {
-    return sprintf(
-      '%s://%s:%s%sapi/v1/account/%s/application/%s/environment/%s/proxy/varnish/state?banExpression=obj.http.Purge-Cache-Tags ~ ',
-      $this->settings->scheme,
+    $base = sprintf('%s://%s:%s%sapi/v1/account/%s/application/%s/environment/%s',
+    $this->settings->scheme,
       $this->settings->hostname,
       $this->settings->port,
       $this->token->replace($this->settings->path, $token_data),
       $this->settings->account,
       $this->settings->application,
       $this->settings->environmentname
-    );
+  );
+  //$base = 'http://dwoop.test:8888';
+    return $base . '/proxy/varnish/state?banExpression=';
   }
   protected function getSiteName() {
     return $this->settings->sitename;
