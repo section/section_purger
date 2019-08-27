@@ -8,7 +8,6 @@ use Drupal\Core\Utility\Token;
 use Drupal\purge\Plugin\Purge\Purger\PurgerBase;
 use Drupal\purge\Plugin\Purge\Purger\PurgerInterface;
 use Drupal\section_purger\Entity\SectionPurgerSettings;
-use Drupal\section_purger\Entity\RawInvalidation;
 
 /**
  * Abstract base class for HTTP based configurable purgers.
