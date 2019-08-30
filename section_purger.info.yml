@@ -5,5 +5,6 @@ package: "Purge - reverse proxies & CDNs"
 dependencies:
   - purge
   - purge_tokens
+  - key
 
 core: 8.x

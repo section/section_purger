@@ -168,7 +168,7 @@ abstract class SectionPurgerFormBase extends PurgerConfigFormBase {
     ];
     $form['request']['password'] = [
       '#title' => $this->t('Section Password'),
-      '#type' => 'password',
+      '#type' => 'key_select',
       '#default_value' => $settings->password,
     ];
   }

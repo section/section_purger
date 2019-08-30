@@ -44,7 +44,7 @@ section_purger.settings.*:
       type: string
       translatable: false
     password:
-      type: string
+      type: key_select
       translatable: false
     request_method:
       type: string

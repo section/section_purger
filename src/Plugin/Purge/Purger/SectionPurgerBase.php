@@ -142,7 +142,7 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    */
   protected function getOptions($token_data) {
     $opt = [
-      'auth' => [$this->settings->username, $this->settings->password],
+      'auth' => [$this->settings->username, \Drupal::service('key.repository')->getKey($this->settings->password)->getKeyValue()],
       'http_errors' => $this->settings->http_errors,
       'connect_timeout' => $this->settings->connect_timeout,
       'timeout' => $this->settings->timeout,
@@ -161,12 +161,10 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    * {@inheritdoc}
    */
   public function getTimeHint() {
-
     // When runtime measurement is enabled, we just use the base implementation.
     if ($this->settings->runtime_measurement) {
       return parent::getTimeHint();
     }
-
     // Theoretically connection timeouts and general timeouts can add up, so
     // we add up our assumption of the worst possible time it takes as well.
     return $this->settings->connect_timeout + $this->settings->timeout;
@@ -198,7 +196,6 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
       $this->settings->application,
       $this->settings->environmentname
   );
-  //$base = 'http://dwoop.test:8888';
     return $base . '/proxy/varnish/state?banExpression=';
   }
   protected function getSiteName() {
