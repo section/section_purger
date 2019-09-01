@@ -142,7 +142,7 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    */
   protected function getOptions($token_data) {
     $opt = [
-      'auth' => [$this->settings->username, $this->settings->password],
+      'auth' => [$this->settings->username, \Drupal::service('key.repository')->getKey($this->settings->password)->getKeyValue()],
       'http_errors' => $this->settings->http_errors,
       'connect_timeout' => $this->settings->connect_timeout,
       'timeout' => $this->settings->timeout,
@@ -161,12 +161,10 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    * {@inheritdoc}
    */
   public function getTimeHint() {
-
     // When runtime measurement is enabled, we just use the base implementation.
     if ($this->settings->runtime_measurement) {
       return parent::getTimeHint();
     }
-
     // Theoretically connection timeouts and general timeouts can add up, so
     // we add up our assumption of the worst possible time it takes as well.
     return $this->settings->connect_timeout + $this->settings->timeout;
@@ -176,7 +174,7 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    * {@inheritdoc}
    */
   public function getTypes() {
-    return [$this->settings->invalidationtype];
+    return ["url", "wildcardurl", "tag", "everything", "wildcardpath", "regex", "path", "domain", "raw"];
   }
 
   /**
@@ -189,16 +187,16 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface {
    *   URL string representation.
    */
   protected function getUri($token_data) {
-    return sprintf(
-      '%s://%s:%s%sapi/v1/account/%s/application/%s/environment/%s/proxy/varnish/state?banExpression=obj.http.Purge-Cache-Tags ~ ',
-      $this->settings->scheme,
+    $base = sprintf('%s://%s:%s%sapi/v1/account/%s/application/%s/environment/%s',
+    $this->settings->scheme,
       $this->settings->hostname,
       $this->settings->port,
       $this->token->replace($this->settings->path, $token_data),
       $this->settings->account,
       $this->settings->application,
       $this->settings->environmentname
-    );
+  );
+    return $base . '/proxy/varnish/state?banExpression=';
   }
   protected function getSiteName() {
     return $this->settings->sitename;
