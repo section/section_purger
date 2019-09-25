@@ -85,26 +85,14 @@ class SectionBundledPurger extends SectionPurgerBase implements PurgerInterface
             $token_data = ['invalidation' => $invalidation];
             $uri = $this->getUri($token_data);
             $opt = $this->getOptions($token_data);
-            $tags = $group['expression'];
-
-            //Sanitize the path
-            $patterns = array(
-            '/([[\]{}()+?".,\\^$|#])/' // Escape regex characters except *
-          , '/\*/'                  // Replace * with .* (for actual Varnish regex)
-        );
-            $replace = array(
-            '\\\$1' // Escape regex characters except *
-          , '.*'    // Replace * with .* (for actual Varnish regex)
-        );
-            $exp = 'req.http.X-Forwarded-Proto == "'. $parse['scheme'] . '" && ' . '" && req.http.host == "' . $parse['host'] . '" && req.url ~ "^';
-            $exp .= preg_replace($patterns, $replace, substr($parse['path'], 1) . $parse['query'] . $parse['fragment']);
+            $tags = new CacheTagsHeaderValue($group['expression'], Hash::cacheTags($group['expression']));
+            $exp = 'obj.http.Section-Cache-Tags ~ "(' . $tags . ')+"';
             //adds this at the end if this instance has a site name in the configuration, for multi-site pages.
             //the ampersands are url encoded to be %26%26 in sendReq
-            $exp .= '$"';
-            $this->logger->debug("[URL] expression `". $invalidation->getExpression() ."` was replaced to be: `". $exp . "`");
+            $this->logger->debug("[Tag] ". count($invalidations) . " tag invalidations were bundled to be: `". $exp . "`");
             $this->sendReq($invalidation, $uri, $opt, $exp);
             foreach ($group['objects'] as $inv) {
-                if ($inv->getState() === InvalidationInterface::SUCCEEDED) {
+                if ($invalidation->getState() === InvalidationInterface::SUCCEEDED) {
                     $inv->setState(InvalidationInterface::SUCCEEDED);
                 } else {
                     $inv->setState(InvalidationInterface::FAILED);
