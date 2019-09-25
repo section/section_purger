@@ -55,6 +55,9 @@ section_purger.settings.*:
     verify:
       type: string
       translatable: false
+    varnishname:
+      type: string
+      translatable: false
 
     #
     # Request headers (outbound):
