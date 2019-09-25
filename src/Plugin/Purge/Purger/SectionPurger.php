@@ -48,8 +48,7 @@ class SectionPurger extends SectionPurgerBase implements PurgerInterface
             $uri = $this->getUri($token_data);
             $opt = $this->getOptions($token_data);
             $this->logger->debug($invalidation->getExpression());
-            $tag = new CacheTagsHeaderValue([$invalidation->getExpression()], Hash::cacheTags([$invalidation->getExpression()]));
-            $exp = 'obj.http.Section-Cache-Tags ~ "' . $tag . '"';
+            $exp = 'obj.http.Section-Cache-Tags ~ "' . Hash::cacheTags([$invalidation->getExpression()])[0] . '"';
             //adds this at the end if this instance has a site name in the configuration, for multi-site pages.
             //the ampersands are url encoded to be %26%26 in sendReq
             if ($this->getSiteName()) {

@@ -209,7 +209,7 @@ class SectionPurgerSettings extends PurgerSettingsBase implements PurgerSettings
      *
      * @var int
      */
-    public $max_requests = 750;
+    public $max_requests = 250;
 
     /**
      * Success resolution.

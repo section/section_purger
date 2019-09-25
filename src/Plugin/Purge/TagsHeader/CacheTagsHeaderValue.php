@@ -10,7 +10,7 @@ class CacheTagsHeaderValue
     /**
      * String: separation character used.
      */
-    const SEPARATOR = '|';
+    const SEPARATOR = ' ';
     /**
      * List of original cache tags.
      *

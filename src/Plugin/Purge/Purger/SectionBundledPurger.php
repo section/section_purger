@@ -86,7 +86,7 @@ class SectionBundledPurger extends SectionPurgerBase implements PurgerInterface
             $uri = $this->getUri($token_data);
             $opt = $this->getOptions($token_data);
             $tags = new CacheTagsHeaderValue($group['expression'], Hash::cacheTags($group['expression']));
-            $exp = 'obj.http.Section-Cache-Tags ~ "(' . $tags . ')+"';
+            $exp = 'obj.http.Section-Cache-Tags ~ "(' . str_replace(' ','|',$tags) . ')+"';
             //adds this at the end if this instance has a site name in the configuration, for multi-site pages.
             //the ampersands are url encoded to be %26%26 in sendReq
             $this->logger->debug("[Tag] ". count($invalidations) . " tag invalidations were bundled to be: `". $exp . "`");
