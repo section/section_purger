@@ -48,6 +48,12 @@ class SectionPurgerSettings extends PurgerSettingsBase implements PurgerSettings
   public $sitename = '';
 
   /**
+   * The name of the varnish proxy instance (defined in section config)
+   *
+   * @var string
+   */
+  public $varnishname = 'varnish';
+  /**
    * The host or IP-address to connect to.
    *
    * @var string
@@ -202,7 +208,7 @@ class SectionPurgerSettings extends PurgerSettingsBase implements PurgerSettings
    *
    * @var int
    */
-  public $max_requests = 100;
+  public $max_requests = 750;
 
   /**
    * Success resolution.

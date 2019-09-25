@@ -146,6 +146,11 @@ abstract class SectionPurgerFormBase extends PurgerConfigFormBase {
       '#type' => 'textfield',
       '#default_value' => $settings->sitename,
     ];
+    $form['request']['varnishname'] = [
+      '#title' => $this->t('Varnish Proxy Instance Name (usually varnish)'),
+      '#type' => 'textfield',
+      '#default_value' => $settings->varnishname,
+    ];
     $form['request']['account'] = [
       '#title' => $this->t('Account Number'),
       '#type' => 'textfield',
@@ -204,7 +209,7 @@ abstract class SectionPurgerFormBase extends PurgerConfigFormBase {
     for ($i = 0; $i < $form_state->get('headers_items_count'); $i++) {
       if (!isset($form['headers']['headers'][$i])) {
         $header = isset($settings->headers[$i]) ? $settings->headers[$i] :
-          ['field' => 'Purge-Cache-Tags', 'value' => '[invalidation:expression]'];
+          ['field' => 'Section-Cache-Tags', 'value' => '[invalidation:expression]'];
         $form['headers']['headers'][$i]['field'] = [
           '#type' => 'textfield',
           '#default_value' => $header['field'],

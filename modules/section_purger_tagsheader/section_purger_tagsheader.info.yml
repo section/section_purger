@@ -1,8 +1,0 @@
-name: Section HTTP Tags Header
-type: module
-description: 'Exports the Purge-Cache-Tags response header to support tag-based invalidation on the Section platform.'
-package: "Purge - reverse proxies & CDNs"
-dependencies:
-  - purge
-
-core: 8.x
