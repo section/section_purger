@@ -7,7 +7,8 @@ use Drupal\section_purger\Form\SectionPurgerFormBase;
 /**
  * Configuration form for the HTTP Bundled Purger.
  */
-class SectionPurgerForm extends SectionPurgerFormBase {
+class SectionPurgerForm extends SectionPurgerFormBase
+{
 
   /**
    * The token group names this purger supports replacing tokens for.
@@ -16,6 +17,5 @@ class SectionPurgerForm extends SectionPurgerFormBase {
    *
    * @see purge_tokens_token_info()
    */
-  protected $tokenGroups = ['invalidation'];
-
+    protected $tokenGroups = ['invalidation'];
 }

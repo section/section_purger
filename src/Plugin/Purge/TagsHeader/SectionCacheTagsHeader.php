@@ -14,12 +14,14 @@ use Drupal\purge\Plugin\Purge\TagsHeader\TagsHeaderBase;
  *   header_name = "Section-Cache-Tags",
  * )
  */
-class SectionCacheTagsHeader extends TagsHeaderBase implements TagsHeaderInterface {
+class SectionCacheTagsHeader extends TagsHeaderBase implements TagsHeaderInterface
+{
     
   /**
    * {@inheritdoc}
    */
-  public function getValue(array $tags) {
-    return new CacheTagsHeaderValue($tags, Hash::cacheTags($tags));
-  }
+    public function getValue(array $tags)
+    {
+        return new CacheTagsHeaderValue($tags, Hash::cacheTags($tags));
+    }
 }
