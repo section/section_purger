@@ -62,7 +62,7 @@ class SectionBundledPurger extends SectionPurgerBase implements PurgerInterface
                     throw new InvalidExpressionException('URL Invalidation failed with '. $invalidation->getExpression());
                 }
             } catch (\Exception $e) {
-                $this->logger->error("Invalid Expression: " .$invalidation->getExpression() . "     -  ". $e->getMessage);
+                $this->logger->error("Invalid Expression: " .$invalidation->getExpression() . "     -  ". $e->getMessage());
                 continue;
             }
             $groups[$group]['objects'][] = $invalidation;
