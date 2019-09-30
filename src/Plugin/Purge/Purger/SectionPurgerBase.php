@@ -106,16 +106,14 @@ abstract class SectionPurgerBase extends PurgerBase implements PurgerInterface
             "\n",
             ' ',
             [
-            'msg' => $e->getMessage(),
             'uri' => $uri,
             'method' => $this->settings->request_method,
             'guzzle_opt' => $opt,
-            'headers' => $headers,
-            'response' => $response->getStatusCode(),
+            'headers' => $headers
           ]
         )
       );
-        $this->logger->critical($debug);
+        $this->logger->critical($e->getMessage() . " \ndata: ". $debug);
     }
     }
 
