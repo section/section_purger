@@ -2,12 +2,13 @@
 
 namespace Drupal\section_purger\Plugin\Purge\Purger;
 
-use Drupal\purge\Plugin\Purge\Purger\PurgerInterface;
-use Drupal\purge\Plugin\Purge\Invalidation\InvalidationInterface;
-use Drupal\section_purger\Plugin\Purge\Purger\SectionPurgerBase;
-use Drupal\section_purger\Plugin\Purge\Purger\SectionPurger;
-use Drupal\section_purger\Plugin\Purge\TagsHeader\CacheTagsHeaderValue;
 use Drupal\section_purger\Entity\Hash;
+use Drupal\purge\Plugin\Purge\Purger\PurgerInterface;
+use Drupal\section_purger\Plugin\Purge\Purger\SectionPurger;
+use Drupal\section_purger\Plugin\Purge\Purger\SectionPurgerBase;
+use Drupal\purge\Plugin\Purge\Invalidation\InvalidationInterface;
+use Drupal\section_purger\Plugin\Purge\TagsHeader\CacheTagsHeaderValue;
+use Drupal\purge\Plugin\Purge\Invalidation\Exception\InvalidExpressionException;
 
 /**
  * Section Bundled Purger.
