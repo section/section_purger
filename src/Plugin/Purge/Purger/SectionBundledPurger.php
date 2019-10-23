@@ -55,19 +55,10 @@ class SectionBundledPurger extends SectionPurgerBase implements PurgerInterface
             if (count($groups[$group]['expression']) >= 250) {
                 $group++;
             }
-            try {
                 $invalidation->validateExpression();
-                $parse = parse_url($invalidation->getExpression());
-                if (!$parse) {
-                    $invalidation->setState(InvalidationInterface::FAILED);
-                    throw new InvalidExpressionException('URL Invalidation failed with '. $invalidation->getExpression());
-                }
-            } catch (\Exception $e) {
-                $this->logger->error("Invalid Expression: " .$invalidation->getExpression() . "     -  ". $e->getMessage());
-                continue;
-            }
-            $groups[$group]['objects'][] = $invalidation;
-            $groups[$group]['expression'][] = $invalidation->getExpression();
+                $groups[$group]['objects'][] = $invalidation;
+                if(!in_array($invalidation->getExpression(),$groups[$group]['expression']))
+                    $groups[$group]['expression'][] = $invalidation->getExpression();
         }
         return $groups;
     }
